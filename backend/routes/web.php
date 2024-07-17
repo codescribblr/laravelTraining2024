@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Http\Request;
@@ -47,3 +50,6 @@ Route::get('/restricted', function () {
 })->middleware(CheckAge::class);
 
 Route::resource('products', ProductController::class);
+Route::resource('categories', CategoryController::class);
+Route::resource('tags', TagController::class);
+Route::resource('profiles', ProfileController::class);

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -21,7 +23,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('products.create', compact('categories', 'tags'));
     }
 
     /**
@@ -33,9 +37,14 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:categories,id',
+            'tags' => 'array',
+            'tags.*' => 'exists:tags,id'
         ]);
 
-        Product::create($validated);
+        $product = Product::create($validated);
+        $product->tags()->sync($request->tags);
+
         return redirect()->route('products.index');
     }
 
@@ -52,7 +61,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('products.edit', compact('product', 'categories', 'tags'));
     }
 
     /**
@@ -64,9 +75,14 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:categories,id',
+            'tags' => 'array',
+            'tags.*' => 'exists:tags,id'
         ]);
 
         $product->update($validated);
+        $product->tags()->sync($request->tags);
+
         return redirect()->route('products.index');
     }
 
