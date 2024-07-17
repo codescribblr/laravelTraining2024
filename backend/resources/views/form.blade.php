@@ -4,6 +4,9 @@
     <title>Form</title>
 </head>
 <body>
+<x-alert type="success">
+    <strong>Success!</strong> Your action was successful.
+</x-alert>
 @if (session('name'))
 <p>Hello, {{ session('name') }}</p>
 @endif
