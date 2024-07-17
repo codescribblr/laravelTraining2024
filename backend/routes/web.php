@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Http\Request;
@@ -43,3 +45,5 @@ Route::resource('posts', PostController::class);
 Route::get('/restricted', function () {
     return 'You are old enough!';
 })->middleware(CheckAge::class);
+
+Route::resource('products', ProductController::class);
