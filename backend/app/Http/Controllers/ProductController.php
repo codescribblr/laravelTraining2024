@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -14,8 +15,33 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+//        $products = Product::all();
+//        return view('products.index', compact('products'));
+        $products = DB::table('products')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->select('products.*', 'categories.name as category_name')
+            ->get();
+
         return view('products.index', compact('products'));
+    }
+
+    public function expensiveProducts()
+    {
+        $products = DB::table('products')->where('price', '<=', 100)->where('price', '>=', 50)->get();
+        return view('products.expensive', compact('products'));
+    }
+
+    public function aggregateData()
+    {
+        $data = [
+            'count' => DB::table('products')->count(),
+            'max' => DB::table('products')->max('price'),
+            'min' => DB::table('products')->min('price'),
+            'avg' => DB::table('products')->avg('price'),
+            'sum' => DB::table('products')->sum('price'),
+        ];
+
+        return view('products.aggregate', compact('data'));
     }
 
     /**
