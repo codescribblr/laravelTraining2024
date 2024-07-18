@@ -6,7 +6,9 @@
 </head>
 <body>
 <h1>Products</h1>
+@can('create', App\Models\Product::class)
 <a href="{{ route('products.create') }}">Create New Product</a>
+@endcan
 <ul>
     @foreach ($products as $product)
     <li>
