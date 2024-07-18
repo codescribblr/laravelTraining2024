@@ -1,6 +1,16 @@
 <!-- resources/views/products/create.blade.php -->
 <form action="{{ route('products.store') }}" method="POST">
     @csrf
+    <h1>Create Product</h1>
+    @if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <label for="name">Name:</label>
     <input type="text" id="name" name="name">
     <br>

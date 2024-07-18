@@ -6,6 +6,15 @@
 </head>
 <body>
 <h1>Create Category</h1>
+@if ($errors->any())
+<div>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <form action="{{ route('categories.store') }}" method="POST">
     @csrf
     <label for="name">Name:</label>

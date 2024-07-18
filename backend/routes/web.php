@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DemoController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -58,5 +59,7 @@ Route::resource('categories', CategoryController::class);
 Route::resource('tags', TagController::class);
 Route::resource('profiles', ProfileController::class);
 
+Route::get('/demo/create', [DemoController::class, 'create'])->name('demo.create');
+Route::post('/demo/store', [DemoController::class, 'store'])->name('demo.store');
 
 

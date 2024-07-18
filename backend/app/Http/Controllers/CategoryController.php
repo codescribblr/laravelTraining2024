@@ -22,7 +22,10 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
+        ], [
+            'name.required' => 'The name field is required.',
+            'name.max' => 'The name must not exceed 255 characters.',
         ]);
 
         Category::create($validated);
@@ -37,6 +40,7 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
+
         return view('categories.edit', compact('category'));
     }
 
@@ -44,7 +48,10 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
+        ], [
+            'name.required' => 'The name field is required.',
+            'name.max' => 'The name must not exceed 255 characters.',
         ]);
 
         $category->update($validated);
