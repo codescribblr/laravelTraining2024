@@ -18,6 +18,11 @@ class Product extends Model
         'tag_id',
     ];
 
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
     // Adds a global scope to the model which will affect every query for this model that is created using the Product::query() method. This does not affect the DB::table() method
     protected static function booted()
     {
