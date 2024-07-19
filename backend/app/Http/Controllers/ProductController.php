@@ -83,6 +83,8 @@ class ProductController extends Controller
         ]);
 
         $product = Product::create($validated);
+        // This is used to overwrite any existing relationships with tags
+        // Instead of looping through each tag sent and saving the relationships, this will delete all existing relationships and create new ones with only the ones passed to the sync method
         $product->tags()->sync($request->tags);
 
         return redirect()->route('products.index');
