@@ -22,7 +22,7 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:5',
+            'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
         ];
@@ -32,7 +32,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'name.required' => 'The name field is required.',
-            'name.max' => 'The name must not exceed 5 characters.',
+            'name.max' => 'The name must not exceed 255 characters.',
             'price.required' => 'The price field is required.',
             'price.numeric' => 'The price field must be a number.',
             'category_id.required' => 'The category field is required.',

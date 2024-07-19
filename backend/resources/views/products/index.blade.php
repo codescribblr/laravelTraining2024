@@ -12,7 +12,7 @@
 <ul>
     @foreach ($products as $product)
     <li>
-        <a href="{{ route('products.show', $product->id) }}">{{ $product->name }} - {{ $product->category_name }} - ${{ $product->price }}</a>
+        <a href="{{ route('products.show', $product->id) }}">{{ $product->name }} - {{ $product->category_name }} - {{ $product->price }}</a>
         <a href="{{ route('products.edit', $product->id) }}">Edit</a>
         <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
             @csrf

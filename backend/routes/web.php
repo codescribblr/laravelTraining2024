@@ -55,7 +55,7 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 Route::get('/products/expensive', [ProductController::class, 'expensiveProducts'])->name('products.expensive');
 Route::get('/products/aggregate', [ProductController::class, 'aggregateData'])->name('products.aggregate');
 
-Route::resource('products', ProductController::class)->middleware('admin');
+Route::resource('products', ProductController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('tags', TagController::class);
 Route::resource('profiles', ProfileController::class);
