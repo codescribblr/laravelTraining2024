@@ -52,6 +52,7 @@ Route::get('/restricted', function () {
 })->middleware(CheckAge::class);
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/test-orm', [ProductController::class, 'testORM'])->name('products.testORM');
 Route::get('/products/expensive', [ProductController::class, 'expensiveProducts'])->name('products.expensive');
 Route::get('/products/aggregate', [ProductController::class, 'aggregateData'])->name('products.aggregate');
 

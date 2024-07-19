@@ -19,11 +19,9 @@ class ProductController extends Controller
 //        $products = Product::all();
 //        return view('products.index', compact('products'));
 //        Gate::authorize('viewAny', Product::class);
-//        $products = DB::table('products')
-//            ->join('categories', 'products.category_id', '=', 'categories.id')
-//            ->select('products.*', 'categories.name as category_name')
-//            ->get();
-        $products = Product::query()->with('category')
+        $products = DB::table('products')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->select('products.*', 'categories.name as category_name')
             ->get();
 
         return view('products.index', compact('products'));
@@ -37,6 +35,13 @@ class ProductController extends Controller
             ->get();
         $products = Product::hydrate($products->toArray());
         return view('products.expensive', compact('products'));
+    }
+
+    public function testORM()
+    {
+        $products = Product::all();
+
+        dd($products->first()->load('category')->toArray());
     }
 
     public function aggregateData()
